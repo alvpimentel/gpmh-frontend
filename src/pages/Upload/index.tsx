@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Container, Card, Button, Form, Spinner, ProgressBar } from 'react-bootstrap';
 import * as XLSX from 'xlsx';
 import { DataTableResult } from '../../components/DataTableResult';
@@ -6,7 +6,6 @@ import { useFileUpload } from '../../hooks/useFileUpload';
 
 export default function Upload() {
     const [file, setFile] = useState<File | null>(null);
-    const [dadosEnviados, setDadosEnviados] = useState(false);
 
     const {
         enviarArquivo,
@@ -16,7 +15,7 @@ export default function Upload() {
         resetar: resetUpload
     } = useFileUpload();
 
-    const handleFileChange = (event : any) => {
+    const handleFileChange = (event : ChangeEvent<HTMLInputElement>) => {
       const selectedFile = event.target.files?.[0];
       if (selectedFile) {
         setFile(selectedFile);
@@ -27,16 +26,13 @@ export default function Upload() {
     const handleFileUpload = async () => {
       if (!file) return;
       
-      const dados = await enviarArquivo(file);
-      if (dados) {
-        setDadosEnviados(true);
-      }
+      await enviarArquivo(file);
     };
 
     const handleDownloadExcel = () => {
-      if (!fileData) {
-        alert('Nenhum dado para gerar a planilha.');
-        return;
+        if (!fileData) {
+          alert('Nenhum dado para gerar a planilha.');
+          return;
       }
 
       const ws = XLSX.utils.json_to_sheet(fileData);

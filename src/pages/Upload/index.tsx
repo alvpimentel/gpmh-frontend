@@ -93,11 +93,9 @@ export default function Upload() {
             </Form.Group>
 
             {fileData ? (
-              <DataTableResult
-                data={fileData}
-                onDownload={handleDownloadExcel}
-                loading={uploadLoading}
-                showSaveButton={dadosEnviados}
+              <DataTableResult 
+                  data={fileData} 
+                  onDownload={handleDownloadExcel}
               />
             ) : (
               <Card className="text-center py-5 bg-light">

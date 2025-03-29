@@ -4,6 +4,9 @@
 - Node.js 18.x ou superior
 - npm 9.x ou superior 
 
+## Portao Padrão
+5173
+
 ## Funcionalidades Principais
 - Envia pra API Python planilha xlsx.
 - Recebe dados JSON da API Python com planilha atualizada
